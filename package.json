@@ -40,7 +40,8 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "diff-match-patch": "^1.0.5"
+    "diff-match-patch": "^1.0.5",
+    "typeit": "^8.8.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.14.0",
