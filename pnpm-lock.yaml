@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      diff-match-patch:
+        specifier: ^1.0.5
+        version: 1.0.5
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.14.0
@@ -17,6 +21,9 @@ importers:
       '@antfu/utils':
         specifier: ^0.7.7
         version: 0.7.7
+      '@types/diff-match-patch':
+        specifier: ^1.0.36
+        version: 1.0.36
       '@types/node':
         specifier: ^20.12.7
         version: 20.12.7
@@ -880,6 +887,9 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
+  '@types/diff-match-patch@1.0.36':
+    resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
+
   '@types/eslint@8.56.9':
     resolution: {integrity: sha512-W4W3KcqzjJ0sHg2vAq9vfml6OhsJ53TcUjUqfzzZf/EChUtwspszj/S0pzMxnfRcO55/iGq47dscXw71Fxc4Zg==}
 
@@ -1283,6 +1293,9 @@ packages:
 
   destr@2.0.0:
     resolution: {integrity: sha512-FJ9RDpf3GicEBvzI3jxc2XhHzbqD8p4ANw/1kPsFBfTvP1b7Gn/Lg1vO7R9J4IVgoMbyUmFrFGZafJ1hPZpvlg==}
+
+  diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
 
   diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
@@ -3373,6 +3386,8 @@ snapshots:
       - supports-color
       - typescript
 
+  '@types/diff-match-patch@1.0.36': {}
+
   '@types/eslint@8.56.9':
     dependencies:
       '@types/estree': 1.0.5
@@ -3837,6 +3852,8 @@ snapshots:
   defu@6.1.4: {}
 
   destr@2.0.0: {}
+
+  diff-match-patch@1.0.5: {}
 
   diff-sequences@29.6.3: {}
 

@@ -1,0 +1,88 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should > exported > apply 1`] = `
+"
+  patches.push({
+    type: 'removal',
+    from: index,
+    length: change[1].length,
+  })
+"
+`;
+
+exports[`should > exported > delta 1`] = `
+[
+  [
+    0,
+    "
+  patches.push({
+    type: '",
+  ],
+  [
+    -1,
+    "insert",
+  ],
+  [
+    1,
+    "removal",
+  ],
+  [
+    0,
+    "',
+    from: index,
+    ",
+  ],
+  [
+    -1,
+    "text",
+  ],
+  [
+    1,
+    "length",
+  ],
+  [
+    0,
+    ": change[1]",
+  ],
+  [
+    1,
+    ".length",
+  ],
+  [
+    0,
+    ",
+  })
+",
+  ],
+]
+`;
+
+exports[`should > exported > patches 1`] = `
+[
+  {
+    "from": 29,
+    "length": 6,
+    "type": "removal",
+  },
+  {
+    "from": 29,
+    "text": "removal",
+    "type": "insert",
+  },
+  {
+    "from": 53,
+    "length": 4,
+    "type": "removal",
+  },
+  {
+    "from": 53,
+    "text": "length",
+    "type": "insert",
+  },
+  {
+    "from": 64,
+    "text": ".length",
+    "type": "insert",
+  },
+]
+`;
