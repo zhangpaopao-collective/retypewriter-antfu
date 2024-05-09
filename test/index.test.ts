@@ -83,14 +83,16 @@ const output = `
 `
 
 describe('should', () => {
-  it('exported', () => {
+  it('diff', () => {
     const delta = diff(input, output)
     expect(delta).toMatchSnapshot('delta')
 
     const patches = calculatePatches(delta)
     expect(patches).toMatchSnapshot('patches')
 
-    const apply = applyPatches(input, patches)
-    expect(apply).toMatchSnapshot('apply')
+    const applied = applyPatches(input, patches)
+    expect(applied).toMatchSnapshot('applied')
+
+    expect(output).toEqual(applied)
   })
 })

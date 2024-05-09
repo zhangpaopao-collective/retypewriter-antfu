@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`should > exported > apply 1`] = `
+exports[`should > diff > applied 1`] = `
 "
   patches.push({
     type: 'removal',
@@ -10,7 +10,7 @@ exports[`should > exported > apply 1`] = `
 "
 `;
 
-exports[`should > exported > delta 1`] = `
+exports[`should > diff > delta 1`] = `
 [
   [
     0,
@@ -57,7 +57,7 @@ exports[`should > exported > delta 1`] = `
 ]
 `;
 
-exports[`should > exported > patches 1`] = `
+exports[`should > diff > patches 1`] = `
 [
   {
     "from": 29,
