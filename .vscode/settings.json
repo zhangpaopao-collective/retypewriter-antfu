@@ -68,6 +68,7 @@
     "cjson",
     "wxml",
     "wxss",
-    "leetcode"
+    "leetcode",
+    "retypewriter"
   ]
 }
