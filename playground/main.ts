@@ -1,5 +1,5 @@
-import { calculatePatches, createAnimator, diff } from './src'
-import { input as _input, output as _output } from './examples'
+import { calculatePatches, createAnimator, diff } from '../src'
+import { input as _input, output as _output } from '../examples'
 
 let input = _input
 let output = _output

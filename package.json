@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "vite",
+    "playground": "vite playground",
     "stub": "unbuild --stub",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
