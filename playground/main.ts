@@ -1,4 +1,4 @@
-import { calculatePatches, createAnimator, diff } from '../src'
+import { calculatePatches, createAnimator, diff } from '../packages/core/index'
 import { input as _input, output as _output } from '../examples'
 
 let input = _input

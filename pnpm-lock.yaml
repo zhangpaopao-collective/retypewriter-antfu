@@ -7,13 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      diff-match-patch:
-        specifier: ^1.0.5
-        version: 1.0.5
-      typeit:
-        specifier: ^8.8.3
-        version: 8.8.3
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.14.0
@@ -33,6 +26,9 @@ importers:
       bumpp:
         specifier: ^9.4.0
         version: 9.4.0
+      diff-match-patch:
+        specifier: ^1.0.5
+        version: 1.0.5
       eslint:
         specifier: ^9.0.0
         version: 9.0.0
@@ -63,6 +59,14 @@ importers:
       vitest:
         specifier: ^1.5.0
         version: 1.5.0(@types/node@20.12.7)
+
+  packages/core:
+    dependencies:
+      diff-match-patch:
+        specifier: ^1.0.5
+        version: 1.0.5
+
+  playground: {}
 
 packages:
 
@@ -919,9 +923,6 @@ packages:
 
   '@types/unist@2.0.6':
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
-
-  '@types/web-animations-js@2.2.16':
-    resolution: {integrity: sha512-ATELeWMFwj8eQiH0KmvsCl1V2lu/qx/CjOBmv4ADSZS5u8r4reMyjCXtxG7khqyiwH3IOMNdrON/Ugn94OUcRA==}
 
   '@typescript-eslint/eslint-plugin@7.7.0':
     resolution: {integrity: sha512-GJWR0YnfrKnsRoluVO3PRb9r5aMZriiMMM/RHj5nnTrBy1/wIgk76XCtCKcnXGjpZQJQRFtGV9/0JJ6n30uwpQ==}
@@ -2552,9 +2553,6 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
-  typeit@8.8.3:
-    resolution: {integrity: sha512-K7nChkj6iyylUi713VBDULUXXLF0pfB6nFPVhNnXTKO2An7NzVz5fjoAHk2FAC3TFLiSnU+QsqhDmap17oBELw==}
-
   typescript@5.4.5:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
@@ -3421,8 +3419,6 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/unist@2.0.6': {}
-
-  '@types/web-animations-js@2.2.16': {}
 
   '@typescript-eslint/eslint-plugin@7.7.0(@typescript-eslint/parser@7.7.0(eslint@9.0.0)(typescript@5.4.5))(eslint@9.0.0)(typescript@5.4.5)':
     dependencies:
@@ -5204,10 +5200,6 @@ snapshots:
   type-fest@0.8.1: {}
 
   type-fest@3.13.1: {}
-
-  typeit@8.8.3:
-    dependencies:
-      '@types/web-animations-js': 2.2.16
 
   typescript@5.4.5: {}
 
