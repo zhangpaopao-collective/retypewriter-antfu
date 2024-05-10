@@ -43,6 +43,7 @@ export function calculatePatches(diffs: Diff[]): Patch[] {
         from: index,
         text: change[1],
       })
+      index += change[1].length
     }
     else {
       throw new Error('unknown change type')
@@ -52,17 +53,14 @@ export function calculatePatches(diffs: Diff[]): Patch[] {
 }
 
 export function applyPatches(input: string, patches: Patch[]) {
-  let added = 0
   let output = input
+
   for (const patch of patches) {
-    const index = patch.from + added
-    if (patch.type === 'insert') {
+    const index = patch.from
+    if (patch.type === 'insert')
       output = output.slice(0, index) + patch.text + output.slice(index)
-      added += patch.text.length
-    }
-    else {
+    else
       output = output.slice(0, index) + output.slice(index + patch.length)
-    }
   }
 
   return output

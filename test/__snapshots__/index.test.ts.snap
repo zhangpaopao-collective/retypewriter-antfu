@@ -70,17 +70,17 @@ exports[`should > diff > patches 1`] = `
     "type": "insert",
   },
   {
-    "from": 53,
+    "from": 60,
     "length": 4,
     "type": "removal",
   },
   {
-    "from": 53,
+    "from": 60,
     "text": "length",
     "type": "insert",
   },
   {
-    "from": 64,
+    "from": 77,
     "text": ".length",
     "type": "insert",
   },

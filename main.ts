@@ -1,5 +1,5 @@
 import TypeIt from 'typeit'
-import { calculatePatches } from './src'
+import { calculatePatches, diff } from './src'
 
 let input = `
   patches.push({
@@ -24,39 +24,46 @@ const outputEl = document.getElementById('output') as HTMLTextAreaElement
 inputEl.value = input
 outputEl.value = output
 
-inputEl.addEventListener('input', () => {
+inputEl.addEventListener('blur', () => {
   input = inputEl.value
+  start()
 })
 
-outputEl.addEventListener('input', () => {
+outputEl.addEventListener('blur', () => {
   output = outputEl.value
+  start()
 })
 
-new TypeIt(typeEl, {
-  speed: 50,
-  startDelay: 900,
-})
-  .type('the mot versti', { delay: 100 })
-  .move(-8, { delay: 100 })
-  .type('s', { delay: 400 })
-  .move(null, { to: 'START', instant: true, delay: 300 })
-  .move(1, { delay: 200 })
-  .delete(1)
-  .type('T', { delay: 225 })
-  .pause(200)
-  .move(2, { instant: true })
-  .pause(200)
-  .move(5, { instant: true })
-  .move(5, { delay: 200 })
-  .type('a', { delay: 350 })
-  .move(null, { to: 'END' })
-  .type('le typing utlity')
-  .move(-4, { delay: 150 })
-  .type('i')
-  .move(null, { to: 'END' })
-  .type(' on the <span class="place">internet</span>', { delay: 400 })
-  .delete('.place', { delay: 800, instant: true })
-  .type('<em><strong class="font-semibold">planet.</strong></em>', {
-    speed: 100,
+let typeIt: TypeIt | null = null
+
+function start() {
+  if (typeIt)
+    typeIt.reset(undefined)
+
+  typeIt = new TypeIt(typeEl, {
+    speed: 50,
+    startDelay: 500,
   })
-  .go()
+
+  typeIt.type(input, { instant: true })
+
+  const patches = calculatePatches(diff(input, output))
+  for (const patch of patches) {
+    typeIt.pause(800)
+    if (patch.type === 'insert') {
+      typeIt
+        .move(null, { to: 'START', instant: true })
+        .move(patch.from, { instant: true })
+        .type(patch.text)
+    }
+    else {
+      typeIt
+        .move(null, { to: 'START', instant: true })
+        .move(patch.from + patch.length, { instant: true })
+        .delete(patch.length)
+    }
+  }
+  typeIt.go()
+}
+
+start()

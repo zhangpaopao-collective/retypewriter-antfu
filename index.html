@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playground</title>
   <style>
-    pre {
-      font-size: 16px;
+    html {
+      font-size: 1.2em;
+    }
+
+    #typeing-wrap {
+      height: 30vh;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
     }
 
     textarea {
@@ -16,7 +23,9 @@
   </style>
 </head>
 <body>
-  <pre id="typeing"></pre>
+  <div id="typeing-wrap">
+    <pre id="typeing"></pre>
+  </div>
   <textarea id="input"></textarea>
   <textarea id="output"></textarea>
 
