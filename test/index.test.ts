@@ -1,21 +1,6 @@
 import { describe, expect, it } from 'vitest'
+import { input, output } from '../examples'
 import { applyPatches, calculatePatches, diff } from '../src'
-
-const input = `
-  patches.push({
-    type: 'insert',
-    from: index,
-    text: change[1],
-  })
-`
-
-const output = `
-  patches.push({
-    type: 'removal',
-    from: index,
-    length: change[1].length,
-  })
-`
 
 describe('should', () => {
   it('diff', () => {

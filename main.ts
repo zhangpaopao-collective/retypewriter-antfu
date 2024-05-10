@@ -1,21 +1,8 @@
-import TypeIt from 'typeit'
-import { calculatePatches, diff } from './src'
+import { calculatePatches, createAnimator, diff } from './src'
+import { input as _input, output as _output } from './examples'
 
-let input = `
-  patches.push({
-    type: 'insert',
-    from: index,
-    text: change[1],
-  })
-`
-
-let output = `
-  patches.push({
-    type: 'removal',
-    from: index,
-    length: change[1].length,
-  })
-`
+let input = _input
+let output = _output
 
 const typeEl = document.getElementById('typeing') as HTMLPreElement
 const inputEl = document.getElementById('input') as HTMLTextAreaElement
@@ -34,36 +21,21 @@ outputEl.addEventListener('blur', () => {
   start()
 })
 
-let typeIt: TypeIt | null = null
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
 
-function start() {
-  if (typeIt)
-    typeIt.reset(undefined)
+async function start() {
+  typeEl.textContent = input
 
-  typeIt = new TypeIt(typeEl, {
-    speed: 50,
-    startDelay: 500,
-  })
+  const delta = diff(input, output)
+  const patches = calculatePatches(delta)
+  const animator = createAnimator(input, patches)
 
-  typeIt.type(input, { instant: true })
-
-  const patches = calculatePatches(diff(input, output))
-  for (const patch of patches) {
-    typeIt.pause(800)
-    if (patch.type === 'insert') {
-      typeIt
-        .move(null, { to: 'START', instant: true })
-        .move(patch.from, { instant: true })
-        .type(patch.text)
-    }
-    else {
-      typeIt
-        .move(null, { to: 'START', instant: true })
-        .move(patch.from + patch.length, { instant: true })
-        .delete(patch.length)
-    }
+  for (const result of animator) {
+    typeEl.textContent = result.output
+    await sleep(Math.random() * 100)
   }
-  typeIt.go()
 }
 
 start()
