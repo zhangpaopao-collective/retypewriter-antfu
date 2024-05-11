@@ -16,7 +16,34 @@
   "activationEvents": [
     "*"
   ],
-  "contributes": {},
+  "contributes": {
+    "commands": [
+      {
+        "category": "re-typewriter",
+        "command": "retypewriter.snap",
+        "title": "Take snapshot to current file",
+        "icon": "$(diff-added)"
+      },
+      {
+        "category": "re-typewriter",
+        "command": "retypewriter.play",
+        "title": "Play typewriter",
+        "icon": "$(play)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "retypewriter.snap",
+          "group": "navigation@1170"
+        },
+        {
+          "command": "retypewriter.play",
+          "group": "navigation@1170"
+        }
+      ]
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "pnpm run build --watch",
