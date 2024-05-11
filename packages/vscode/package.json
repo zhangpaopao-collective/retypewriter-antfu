@@ -1,0 +1,30 @@
+{
+  "publisher": "retypewriter",
+  "name": "re-typewriter",
+  "displayName": "Custom view Samples",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "license": "MIT",
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "engines": {
+    "vscode": "^1.89.1"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {},
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "dev": "pnpm run build --watch",
+    "publish": "@vscode/vsce publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.89.0",
+    "@vscode/vsce": "^2.26.1",
+    "tsup": "^8.0.2"
+  }
+}
