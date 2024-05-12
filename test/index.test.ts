@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { input, output } from '../examples'
-import { applyPatches, calculatePatches, diff } from '../src'
+import { applyPatches, calculatePatches, diff } from '../packages/core/index'
 
 describe('should', () => {
   it('diff', () => {

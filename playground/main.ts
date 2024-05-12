@@ -33,7 +33,7 @@ async function start() {
   const animator = createAnimator(input, patches)
 
   for (const result of animator) {
-    typeEl.textContent = result.output
+    typeEl.textContent = result.content
     await sleep(Math.random() * 100)
   }
 }
