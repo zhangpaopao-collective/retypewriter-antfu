@@ -2,10 +2,10 @@ import { calculatePatches, diff } from './patch'
 import type { Patch } from './types'
 
 export interface AnimatorStep {
-  index: number
-  char?: string
+  patchIndex: number
   cursor: number
   content: string
+  char?: string
 }
 
 export function* createAnimator(input: string, patches: Patch[]): Generator<AnimatorStep> {
@@ -17,10 +17,10 @@ export function* createAnimator(input: string, patches: Patch[]): Generator<Anim
         const index = patch.from + i
         _input = _input.slice(0, index) + patch.text[i] + _input.slice(index)
         yield {
-          index: patchIndex,
-          char: patch.text[i],
+          patchIndex,
           cursor: index,
           content: _input,
+          char: patch.text[i],
         }
       }
     }
@@ -29,7 +29,7 @@ export function* createAnimator(input: string, patches: Patch[]): Generator<Anim
         const index = patch.from - i
         _input = _input.slice(0, index - 1) + _input.slice(index)
         yield {
-          index: patchIndex,
+          patchIndex,
           cursor: index,
           content: _input,
         }

@@ -1,4 +1,4 @@
-import { Position, Range, Selection, commands, window } from 'vscode'
+import { Range, Selection, commands, window } from 'vscode'
 import { simpleAnimator } from '../../core/index'
 
 export interface Snapshot {
@@ -15,7 +15,14 @@ export function activate() {
 
   const snapMap = new Map<string, Snapshot[]>()
 
+  let isPlaying: boolean = false
+
   commands.registerCommand('retypewriter.snap', () => {
+    if (isPlaying) {
+      window.showErrorMessage('re-typewriter: can not snap when playing')
+      return
+    }
+
     const doc = window.activeTextEditor?.document
     if (!doc)
       return
@@ -35,10 +42,15 @@ export function activate() {
       time: Date.now(),
     })
 
-    window.showInformationMessage(`re-typewriter: snap added ${snaps.length}`)
+    window.showInformationMessage(`re-typewriter: snap added (${snaps.length})`)
   })
 
   commands.registerCommand('retypewriter.play', async () => {
+    if (isPlaying) {
+      window.showErrorMessage('re-typewriter: can not snap when playing')
+      return
+    }
+
     const editor = window.activeTextEditor
     const doc = editor?.document
 
@@ -53,6 +65,8 @@ export function activate() {
       return
     }
 
+    isPlaying = true
+
     const lastSnap = snaps[snaps.length - 1]
 
     // save current text to be last snapshot
@@ -65,48 +79,44 @@ export function activate() {
 
     window.showInformationMessage('re-typewriter: Playing')
 
-    // clear current editor before playing
-    editor.edit((edit) => {
-      edit.replace(
-        new Range(0, 0, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY),
-        '',
-      )
-    })
-
     let lastContent: string | undefined
     for (const snap of snaps) {
       if (!lastContent) {
         lastContent = snap.content
+        // clear current editor before playing
+        await editor.edit((edit) => {
+          edit.replace(
+            new Range(0, 0, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY),
+            lastContent!,
+          )
+        })
         continue
       }
 
       const animator = simpleAnimator(lastContent, snap.content)
-
+      let lastIndex = 0
       for (const result of animator) {
+        // sleep more when switch to next patch
+        if (lastIndex !== result.patchIndex)
+          await sleep(600)
+
         const pos = doc.positionAt(result.cursor)
-        // if (result.char != null) {
-        //   editor.edit((edit) => {
-        //     edit.insert(pos, result.char!)
-        //   })
-        // }
-        // else {
-        //   editor.edit((edit) => {
-        //     edit.delete(new Range(doc.positionAt(result.cursor - 1), pos))
-        //   })
-        // }
-        editor.edit((edit) => {
-          edit.replace(
-            new Range(0, 0, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY),
-            result.content,
-          )
-        })
         editor.selection = new Selection(pos, pos)
-        await sleep(Math.random() * 100)
+        await editor.edit((edit) => {
+          if (result.char != null)
+            edit.insert(pos, result.char)
+
+          else
+            edit.delete(new Range(doc.positionAt(result.cursor - 1), pos))
+        })
+        await sleep(Math.random() * 60 + 40)
+        lastIndex = result.patchIndex
       }
 
       lastContent = snap.content
     }
 
+    isPlaying = false
     window.showInformationMessage('re-typewriter: Finished')
   })
 }
